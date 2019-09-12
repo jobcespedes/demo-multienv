@@ -1,0 +1,4 @@
+*.retry
+*secrets.y*ml
+vault.yml
+test_vars/

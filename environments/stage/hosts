@@ -1,0 +1,11 @@
+[group1]
+host_stage_1
+host_1
+
+[group2]
+host_stage_2
+host_2
+
+[groups:children]
+group1
+group2

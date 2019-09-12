@@ -1,0 +1,11 @@
+- name: foo var
+  hosts: "{{ this_hosts | default('localhost') }}"
+  connection: local # local or smart
+  become: "{{ this_become | default(false) }}"
+  serial: "{{ this_serial  | default(0) }}"
+  gather_facts: false
+  tasks:
+    - name: "include role"
+      include_role:
+        name: "{{ this_role | default('foo') }}"
+        tasks_from: "{{ this_tasks | default('main') }}"
