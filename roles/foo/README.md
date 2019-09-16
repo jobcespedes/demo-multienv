@@ -1,7 +1,7 @@
 Role Name
 =========
 
-Test ansile stuff
+Test Ansile stuff
 
 Requirements
 ------------
@@ -21,9 +21,12 @@ None
 Example Playbook
 ----------------
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
-
-ansible-playbook playbooks/foo.yml -e foo_host=localhost -e foo_role=foo -e foo_var="uno"
+- name: test foo_var in foo role
+  hosts: "{{ this_hosts | default('localhost') }}"
+  connection: local
+  gather_facts: false
+  roles:
+    - role: foo
 
 License
 -------

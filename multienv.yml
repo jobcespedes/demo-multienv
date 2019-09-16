@@ -1,0 +1,5 @@
+- name: prepare multienvironment
+  hosts: localhost
+  connection: local
+  roles:
+    - role: jobcespedes.multienv

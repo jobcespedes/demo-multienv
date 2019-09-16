@@ -2,3 +2,6 @@
 *secrets.y*ml
 vault.yml
 test_vars/
+.Trash-1000/
+.unionfs-fuse/
+.unionfs/
