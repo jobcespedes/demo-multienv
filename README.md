@@ -9,15 +9,17 @@
 6. Test repeating step #4
 
 ## Description
-This project is for testing a stackable multienvironment directory layout for Ansible. The main goal is to have stackable environments with little data and file duplication while maintaining Ansible groups and host granularity. That is to have a separated environment based over one or more others so each one has only the different files and artifacts. The current approach is to use [unionfs](http://unionfs.filesystems.org/) and a container for stacking environments.
+This project is for testing a stackable multienvironment directory layout for Ansible. The main goal is to have little data and file duplication in a multienvironment Ansible project while maintaining Ansible groups and host granularity. The environments are separated. However, they are based over the others in a hierarchical way. So each one only has the necessary files and artifacts. The current approach to achieve this is to use [unionfs](http://unionfs.filesystems.org/) and a container for stacking the environments.
 
 ## Problem
-Many systems are deployed in a multienvironment context. Most common environments are development, stage and production.  They often share variables and artifacts. For Ansible, there are several approaches for those contexts. For example, [separate directory layout](https://docs.ansible.com/ansible/latest/user_guide/playbooks_best_practices.html#alternative-directory-layout) and [soft links](https://www.digitalocean.com/community/tutorials/how-to-manage-multistage-environments-with-ansible). However, one may end up with many duplicate files among environments, exposing variables to all hosts or adding much more complexity to playbooks.
+Many systems are deployed in a multienvironment context, for example: development, stage and production.  These environments often share variables and artifacts. In Ansible, there are different methods to work in this context. For example, [separate directory layout](https://docs.ansible.com/ansible/latest/user_guide/playbooks_best_practices.html#alternative-directory-layout) and [soft links](https://www.digitalocean.com/community/tutorials/how-to-manage-multistage-environments-with-ansible). However, it can end with a considerable amount of data and duplicate files between environments, exposing variables to all hosts or adding much more complexity to playbooks.
 
 ## Approach
-The approach is to use a [separate directory layout](https://docs.ansible.com/ansible/latest/user_guide/playbooks_best_practices.html#alternative-directory-layout) as recomended by Ansible best practices. Those separate directories' layouts are stacked hierarchy into one using [unionfs](http://unionfs.filesystems.org/). The resulting union directory is used as the current Ansible environment (inventory, vars, artifacts)
+A [separate directory layout](https://docs.ansible.com/ansible/latest/user_guide/playbooks_best_practices.html#alternative-directory-layout) is used as recomended by Ansible Best Practices. Then they are unified as one using [unionfs](http://unionfs.filesystems.org/). The resulting directory is used as the current Ansible environment (inventory, vars, artifacts, etc)
 
-This way, one can modify each environment in its respective directory: envionments/dev for example. And instruct ansible to use the stackable environment: production (production+stage+dev) for example. Refer to [multienv Ansible role](https://github.com/jobcespedes/multienv/blob/master/README.md) for how to configure the stackable environment
+This way, one can modify each environment in its respective directory: envionments/dev for example. And instruct Ansible to use the unified directory, `union_environment`, as a stacked environment: production+stage+dev
+
+Refer to [multienv Ansible role](https://github.com/jobcespedes/multienv/blob/master/README.md) for how to configure the stackable environment
 
 ## Other options considered
 * **Ansible plugins**: the logic could be added using Ansible plugins. It has to handled inventory, vars and other artifacts (files, templates, among others). [Unionfs](http://unionfs.filesystems.org/) approach could handled those without addional plugins
