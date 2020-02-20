@@ -18,7 +18,7 @@ Many systems are deployed in a multienvironment context, for example: production
 
 ---
 ## Approach
-A [separate directory layout](https://docs.ansible.com/ansible/latest/user_guide/playbooks_best_practices.html#alternative-directory-layout) is used as recommended by Ansible Best Practices. There could be: 1. **base** environment: for the most common and shared variables and artifacts; 2. **dev** environment; 3. **stage** environment; and 4 **production**. Then, two or more of them could be unified as one using [unionfs](http://unionfs.filesystems.org/). That directory is used as the current Ansible environment (inventory, vars, artifacts, etc). This way, one can modify each environment in its respective directory. And instruct Ansible to use the unified directory as its inventory parameter.
+A [separate directory layout](https://docs.ansible.com/ansible/latest/user_guide/playbooks_best_practices.html#alternative-directory-layout) is used as recommended by Ansible Best Practices. There could be: a. **base** environment: for the most common and shared variables and artifacts; b. **dev** environment; c. **stage** environment; and d. **production**. Then, two or more of them could be unified as one using [unionfs](http://unionfs.filesystems.org/). That directory is used as the current Ansible environment (inventory, vars, artifacts, etc). This way, one can modify each environment in its respective directory. And instruct Ansible to use the unified directory as its inventory parameter.
 
 ---
 ## Example #1 - simple stacked environment

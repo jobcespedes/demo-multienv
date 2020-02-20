@@ -2,11 +2,5 @@
   hosts: all
   connection: local
   gather_facts: false
-  vars:
-    multienv_union:
-      - base
-      - dev
-      # - stage
-      # - production
   roles:
     - role: foo
