@@ -1,6 +1,6 @@
 # Testing a stackable multienvironment directory layout for Ansible
 [![Buy me a coffee](https://img.shields.io/badge/$-BuyMeACoffee-blue.svg)](https://www.buymeacoffee.com/jobcespedes)
-## Quickstart:
+## Quickstart - Docker:
 1. Check that [Docker](https://docs.docker.com/install/) and [Docker SDK for Python](https://docker-py.readthedocs.io/en/stable/) are installed in your system.
 2. Download this repo: ```git clone --recursive https://github.com/jobcespedes/demo-multienv && cd demo-multienv```
 3. Stack the environment (production over base): ```ansible-playbook -i localhost, multienv.yml```
@@ -8,6 +8,14 @@
 5. Modify files inside ```environments/<environment>```
 6. Test repeating step #4
 > Refer to [multienv Ansible role](https://github.com/jobcespedes/multienv/blob/master/README.md) for how to configure the stackable environment
+---
+## Quickstart - Podman:
+1. Check that [Podman](https://podman.io/getting-started/installation.html) are installed in your system.
+2. Download this repo: ```git clone --recursive https://github.com/jobcespedes/demo-multienv && cd demo-multienv```
+3. Stack the environment (production over base): ```ansible-playbook -i localhost, multienv.yml -e multienv_podman=true -K```
+4. Test running a _foo_ playbook: ```ansible-playbook foo.yml```
+5. Modify files inside ```environments/<environment>```
+6. Test repeating step #4
 ---
 ## Description
 This project is for testing a stackable multienvironment directory layout for Ansible. The main goal is to have little data and file duplication in a multienvironment Ansible project while maintaining Ansible groups and host granularity. The environments are separated. However, they are based over the others in a hierarchical way. So each one only has the necessary files and artifacts. The approach to achieve this is to use [unionfs](http://unionfs.filesystems.org/) and a container for stacking the environments.
