@@ -53,7 +53,7 @@ multienv_union:
 ---
 ## Other options considered
 * **Ansible plugins**: the logic could be added using Ansible plugins. It has to handled inventory, vars and other artifacts (files, templates, among others). [Unionfs](http://unionfs.filesystems.org/) approach could handled those without addional plugins
-* **Overlayfs**: It is another union filesystem included in the current linux kernel. However, it cannot handle online modification of the lower layers. If one wants to modify the base environment (lower) while on production (upper), an operation like remount is needed to reflect changes in the union mount.
+* **Overlayfs**: It is another union filesystem included in the current linux kernel. However, I couldn't get it working for some type of modifications of the lower and upper layers using fuse-overlayfs. For example, while mounted, a file created in the base environment (lower) does not appear in the union directory. A file that exists in both environment and is deleted, breaks its path in the union folder. An operation like remount is needed to reflect those changes in the union mount.
 * **Rsync and Inotify**. Using inotify to monitor modifications and rsync to sync into one environment. One consideration about this is how to handle deleted files in the destination. They are replace again every time the command runs.
 
 ## Issues
