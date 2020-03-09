@@ -9,4 +9,4 @@
 6. Test repeating step #4
 > Refer to [multienv Ansible role](https://github.com/jobcespedes/multienv/blob/master/README.md) for how to configure the stackable environment
 
-> [Read the article about it](https://jobcespedes.dev/2020/02/multiple-environments-in-ansible/)
+> [Read the article for more detail](https://jobcespedes.dev/2020/02/multiple-environments-in-ansible/)
